@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xenotic Control panel</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* رنگ پس زمینه */
+  }
+  .header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+  }
+  h1 {
+    font-size: 13px; /* اندازه عنوان کوچکتر شده است */
+    margin: 0;
+  }
+  .container {
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+  }
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .button-container button {
+    margin: 10px;
+    padding: 8px 16px; /* اندازه دکمه‌ها کوچکتر شده است */
+    font-size: 14px; /* اندازه متن دکمه‌ها کوچکتر شده است */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #4CAF50; /* رنگ پیش‌فرض دکمه */
+    border-radius: 5px; /* شکل گوشه‌های گرد دکمه */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* سایه دکمه */
+  }
+  .button-container button:hover {
+    background-color: #45a049; /* رنگ دکمه هنگام هاور */
+  }
+  .row1 button {
+    background-color: #808080; /* رنگ خاکستری */
+  }
+  .row2 button {
+    background-color: #4169e1; /* رنگ آبی */
+  }
+  .row3 button {
+    background-color: #32cd32; /* رنگ سبز */
+  }
+  .row4 button {
+    background-color: #ff1493; /* رنگ صورتی پررنگ */
+  }
+  .row5 button {
+    background-color: #ffa500; /* رنگ نارنجی */
+  }
+  .row6 button {
+    background-color: #ff0000; /* رنگ قرمز */
+  }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Xenotic Control panel</h1>
+</div>
+
+<div class="container">
+  <div class="button-container row1">
+    <button onclick="sendMessage('URL#')">مکان خودرو در نقشه</button>
+    <button onclick="sendMessage('URL#WHERE#')">مکان خودرو با جزئیات</button>
+  </div>
+  <div class="button-container row2">
+    <button onclick="sendMessage('STATUS#')">وضعیت ردیاب</button>
+    <button onclick="sendMessage('PARAM#')">پارامترهای ردیاب</button>
+  </div>
+  <div class="button-container row3">
+    <button onclick="sendMessage('ACCREP,ON#')">هشدار روشن شدن  فعال</button>
+    <button onclick="sendMessage('ACCREP,OFF#')">هشدار روشن شدن غیر فعال</button>
+  </div>
+  <div class="button-container row4">
+    <button onclick="sendMessage('Door,1#')">هشدار باز شدن درب فعال</button>
+    <button onclick="sendMessage('Door,0#')">هشدار باز شدن درب غیر فعال</button>
+  </div>
+  <div class="button-container row5">
+    <button onclick="sendMessage('DEFENCE,1#')">هشدار لرزش فعال</button>
+    <button onclick="sendMessage('DEFENCE,0#')">هشدار لرزش غیر فعال</button>
+  </div>
+  <div class="button-container row6">
+    <button onclick="sendMessage('relay,1#')">قطع کردن برق</button>
+    <button onclick="sendMessage('relay,0#')">وصل کردن برق</button>
+  </div>
+</div>
+
+<div class="footer">
+  Powered by: Mostafa Mandegari
+</div>
+
+<script>
+function sendMessage(message) {
+  var phoneNumber = "+989361663843";
+  var url = "sms:" + phoneNumber + "?body=" + encodeURIComponent(message);
+  window.location.href = url;
+}
+</script>
+
+</body>
+</html>

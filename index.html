@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xenotic Control panel</title>
+<title>پنل کنترل زنوتیک</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
   body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* رنگ پس زمینه */
+    background-color: #f0f0f0;
+    direction: rtl;
   }
   .header {
     background-color: #333;
@@ -19,113 +21,159 @@
     border-bottom: 2px solid #ccc;
   }
   h1 {
-    font-size: 13px; /* اندازه عنوان کوچکتر شده است */
+    font-size: 13px;
     margin: 0;
   }
   .container {
-    margin: 20px auto;
-    padding: 20px;
+    margin: 10px auto;
+    padding: 15px;
     border: 2px solid #ccc;
     border-radius: 10px;
     background-color: #fff;
-    width: 80%;
+    width: 90%;
     max-width: 600px;
   }
   .button-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 5px;
     justify-content: center;
+    margin-bottom: 15px;
   }
   .button-container button {
-    margin: 5px;
-    padding: 8px 16px; /* اندازه دکمه‌ها کوچکتر شده است */
-    font-size: 14px; /* اندازه متن دکمه‌ها کوچکتر شده است */
+    padding: 5px 10px;
+    font-size: 11px;
     border: none;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #4CAF50; /* رنگ پیش‌فرض دکمه */
-    border-radius: 5px; /* شکل گوشه‌های گرد دکمه */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* سایه دکمه */
+    background: linear-gradient(135deg, #4CAF50, #2e7d32);
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
   }
   .button-container button:hover {
-    background-color: #45a049; /* رنگ دکمه هنگام هاور */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #45a049, #276d29);
   }
-  .row1 button {
-    background-color: #808080; /* رنگ خاکستری */
+  .button-container button i {
+    margin-left: 4px;
+    font-size: 12px;
   }
-  .row2 button {
-    background-color: #4169e1; /* رنگ آبی */
-  }
-  .row3 button {
-    background-color: #32cd32; /* رنگ سبز */
-  }
-  .row4 button {
-    background-color: #ff1493; /* رنگ صورتی پررنگ */
-  }
-  .row5 button {
-    background-color: #ffa500; /* رنگ نارنجی */
-  }
+  .row1 button { background: linear-gradient(135deg, #808080, #616161); }
+  .row1 button:hover { background: linear-gradient(135deg, #757575, #555555); }
+  .row2 button { background: linear-gradient(135deg, #4169e1, #304ffe); }
+  .row2 button:hover { background: linear-gradient(135deg, #3b5bd6, #2a45e5); }
+  .row3 button { background: linear-gradient(135deg, #32cd32, #27a127); }
+  .row3 button:hover { background: linear-gradient(135deg, #2db72d, #228c22); }
+  .row4 button { background: linear-gradient(135deg, #ff1493, #d81b60); }
+  .row4 button:hover { background: linear-gradient(135deg, #e91e63, #c2185b); }
+  .row5 button { background: linear-gradient(135deg, #ffa500, #f57c00); }
+  .row5 button:hover { background: linear-gradient(135deg, #fb8c00, #ef6c00); }
+  .row6 button { background: linear-gradient(135deg, #ff0000, #d32f2f); }
+  .row6 button:hover { background: linear-gradient(135deg, #e53935, #c62828); }
   .row6 button {
-    background-color: #ff0000; /* رنگ قرمز */
+    padding: 8px 16px;
+    font-size: 14px;
   }
   .footer {
     text-align: center;
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 10px;
+  }
+  .map-link {
+    text-align: center;
+    margin-top: 10px;
+  }
+  .map-link button {
+    background: linear-gradient(135deg, #4287f5, #3267d6);
+    padding: 6px 12px;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .map-link button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #3b77e6, #2b59c2);
+  }
+  .loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
   }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Xenotic Control panel</h1>
+  <h1>پنل کنترل زنوتیک</h1>
 </div>
 
 <div class="container">
-
-
-
-
   <div class="button-container row1">
-    <button onclick="sendMessage('URL#')">مکان خودرو در نقشه</button>
-    <button onclick="sendMessage('URL#WHERE#')">مکان خودرو با جزئیات</button>
+    <button onclick="sendMessage('URL#')"><i class="fas fa-map-marker-alt"></i> مکان خودرو در نقشه</button>
+    <button onclick="sendMessage('URL#WHERE#')"><i class="fas fa-info-circle"></i> مکان خودرو با جزئیات</button>
   </div>
-  <div class="button-container row2">
-    <button onclick="sendMessage('STATUS#')">وضعیت ردیاب</button>
-    <button onclick="sendMessage('PARAM#')">پارامترهای ردیاب</button>
-  </div>
-  <div class="button-container row3">
-    <button onclick="sendMessage('ACCREP,ON#')">هشدار روشن شدن  فعال</button>
-    <button onclick="sendMessage('ACCREP,OFF#')">هشدار روشن شدن غیر فعال</button>
-  </div>
-  <div class="button-container row4">
-   <button onclick="sendMessage('DOORALM,ON#')">هشدار باز شدن درب فعال</button>
-    <button onclick="sendMessage('DOORALM,OFF#')">هشدار باز شدن درب غیر فعال</button>
-  </div>
-  <div class="button-container row5">
-    <button onclick="sendMessage('DEFENCE,1#')">هشدار لرزش فعال</button>
-    <button onclick="sendMessage('DEFENCE,0#')">هشدار لرزش غیر فعال</button>
-  </div>
-  <div class="button-container row6">
-    <button onclick="sendMessage('relay,1#')">قطع کردن برق</button>
-    <button onclick="sendMessage('relay,0#')">وصل کردن برق</button>
-	
-	
 
+  <div class="button-container row2">
+    <button onclick="sendMessage('STATUS#')"><i class="fas fa-signal"></i> وضعیت ردیاب</button>
+    <button onclick="sendMessage('PARAM#')"><i class="fas fa-cogs"></i> پارامترهای ردیاب</button>
   </div>
+
+  <div class="button-container row3">
+    <button onclick="sendMessage('ACCREP,ON#')"><i class="fas fa-toggle-on"></i> هشدار روشن شدن فعال</button>
+    <button onclick="sendMessage('ACCREP,OFF#')"><i class="fas fa-toggle-off"></i> هشدار روشن شدن غیر فعال</button>
+  </div>
+
+  <div class="button-container row4">
+    <button onclick="sendMessage('DOORALM,ON#')"><i class="fas fa-door-open"></i> هشدار باز شدن درب فعال</button>
+    <button onclick="sendMessage('DOORALM,OFF#')"><i class="fas fa-door-closed"></i> هشدار باز شدن درب غیر فعال</button>
+  </div>
+
+  <div class="button-container row5">
+    <button onclick="sendMessage('DEFENCE,1#')"><i class="fas fa-bell"></i> هشدار لرزش فعال</button>
+    <button onclick="sendMessage('DEFENCE,0#')"><i class="fas fa-bell-slash"></i> هشدار لرزش غیر فعال</button>
+  </div>
+
+  <div class="button-container row6">
+    <button onclick="sendMessage('relay,1#')"><i class="fas fa-power-off"></i> قطع کردن برق</button>
+    <button onclick="sendMessage('relay,0#')"><i class="fas fa-plug"></i> وصل کردن برق</button>
+  </div>
+</div>
+
+<div class="map-link">
+  <button onclick="location.href='https://www.xenotic.app/login'">مکان خودرو روی نقشه</button>
 </div>
 
 <div class="footer">
-<button onclick="location.href='https://www.xenotic.app/login'" style="background-color: #4287f5;">مکان خودرو روی نقشه</button> </p>
-  Powered by: Mostafa Mandegari
+  <p>Powered by: Mostafa Mandegari</p>
 </div>
+
+<div id="loading" class="loading">در حال ارسال...</div>
 
 <script>
 function sendMessage(message) {
-  var phoneNumber = "+989361663843";
-  var url = "sms:" + phoneNumber + "?body=" + encodeURIComponent(message);
-  window.location.href = url;
+  document.getElementById('loading').style.display = 'block';
+  setTimeout(() => {
+    var phoneNumber = "+989361663843";
+    var url = "sms:" + phoneNumber + "?body=" + encodeURIComponent(message);
+    window.location.href = url;
+    document.getElementById('loading').style.display = 'none';
+  }, 500);
 }
 </script>
 
